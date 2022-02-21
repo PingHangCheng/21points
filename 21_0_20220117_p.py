@@ -162,7 +162,7 @@ def GameStart():
 
 
 GameStart()
-# print()
+print()
 
 
 def GameEnd():
@@ -177,7 +177,23 @@ def GameEnd():
     for i in user:
         print(f"{i.name}的點數:{i.C_point},牌組：{i.C_handCard}")
         if prizelist == []:
-            prizelist.append({"point": i.C_point, "name": [i.name]})
+            prizelist.append({"point": i.C_point, "name": [i.name]}) #{point:21, name:XXX}
+        else:  #prizelist不是空的
+            templist = [i['point'] for i in prizelist] #建立單純點數的list
+            if i.C_point in templist:
+                temp = templist.index(i.C_point)
+                prizelist[temp]['name'].append(i.name)
+            else: #點數沒有出現過的狀況
+                for j in templist:
+                    if i.C_point > j:
+                        temp = templist.index(j)
+                        prizelist.insert(temp, {"point": i.C_point, "name": [i.name]})
+                        break
+                    elif j == templist[-1]: #templist[-1]指直接抓templist最後一個
+                        #或i.Cpoint < templist[-1]假如C_point都小於templist裡的點數
+
+            
+
 
     print("開始頒獎")
 
@@ -185,7 +201,7 @@ def GameEnd():
 
 
 GameEnd()
-print()
+#print()
 # 程式從這邊開始
 
 # 選擇幾副撲克牌

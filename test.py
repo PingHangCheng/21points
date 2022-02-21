@@ -14,8 +14,12 @@
 #     for j in list:
 #         print(j * i)
 
+list2 = [{'B':8}, {'B':9}, {'B':10}]
+print([i['B'] for i in list2]) #[i['B'] for i in list2]會產生列表
+
 list1 = [{"A":1}, {"A":2}, {"A":3}]
 s = [i['A'] for i in list1]
+print(1 in [i['A'] for i in list1])
 print(4 in [i['A'] for i in list1])
 
 print(s.index(2))

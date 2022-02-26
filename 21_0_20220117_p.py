@@ -162,7 +162,7 @@ def GameStart():
 
 
 GameStart()
-print()
+#print()
 
 
 def GameEnd():
@@ -180,25 +180,28 @@ def GameEnd():
             prizelist.append({"point": i.C_point, "name": [i.name]}) #{point:21, name:XXX}
         else:  #prizelist不是空的
             templist = [i['point'] for i in prizelist] #建立單純點數的list
-            if i.C_point in templist:
+            if i.C_point in templist:#點數一樣時
                 temp = templist.index(i.C_point)
                 prizelist[temp]['name'].append(i.name)
             else: #點數沒有出現過的狀況
                 for j in templist:
-                    if i.C_point > j:
+                    if i.C_point > j:#新的點數較大時
+                        #templist是大至小排序，如：[5,3,1]如果找到，就break否則演變依序為
+                        #[6,5,3,1][6,6,5,3,1][6,6,5,3,1]才不會一直將同樣的值加進來
                         temp = templist.index(j)
                         prizelist.insert(temp, {"point": i.C_point, "name": [i.name]})
                         break
-                    elif j == templist[-1]: #templist[-1]指直接抓templist最後一個
-                        #或i.Cpoint < templist[-1]假如C_point都小於templist裡的點數
+                    elif j == templist[-1]: #新的點數較小時，j == templist[-1]每個都比一次
+                        #templist[-1]指直接抓templist最後一個
+                        #或i.C_point < templist[-1](較佳寫法，因為直接與最後一個比庵)假如C_point都小於templist裡的點數
+                        prizelist.append({"point": i.C_point, "name": [i.name]})
 
             
 
 
-    print("開始頒獎")
+    #print("開始頒獎")
 
     # print(Leaderboard)
-
 
 GameEnd()
 #print()
